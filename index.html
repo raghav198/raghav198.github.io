@@ -31,11 +31,11 @@
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#intro">Intro</a></li>
+								<li><a href="#research">Research</a></li>
 								<li><a href="#work">Work</a></li>
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
-								<!-- <li><a href="#elements">Elements</a></li> -->
+								<li><a href="#elements">Elements</a></li>
 							</ul>
 						</nav>
 					</header>
@@ -44,22 +44,47 @@
 					<div id="main">
 
 						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Research Focus</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>TL;DR: I'm interested in building compilers specifically to optimize Fully Homomorphic Encryption programs. </p>
-								<p>Fully Homomorphic Encryption refers to any number of encryption schemes that preserve the ring structure of their plaintext (i.e. if you encrypt two numbers and add or multiply the ciphertexts, you get back an encryption of the sum or product of the original numbers).
-								FHE is a powerful tool for for implementing arbitrary fixed-size arithmetic circuits over encrypted data, but the FHE computational model is very different from the one you're used to. 
-								</p>
-							</article>
+						<article id="research">
+							<h2 class="major">My Research</h2>
+							<span class="image main"><img src="images/homomorphic-encryption-diagram.png" alt="" /></span>
+							<p>TL;DR: I'm interested in building compilers specifically to optimize Fully Homomorphic Encryption programs. </p>
+							<p>
+								Fully Homomorphic Encryption refers to any number of encryption schemes that preserve the ring structure of their plaintext (i.e. if you encrypt two numbers and add or multiply the ciphertexts, you get back an encryption of the sum or product of the original numbers).
+								FHE is a powerful tool for for implementing arbitrary fixed-size arithmetic circuits over encrypted data, but the underlying computational model is very different from the one you're used to. 
+								Taking these pecularities into account when compiling arithmetic FHE circuits is often challenging, and my research is interested in building compilers that automatically factor in all the FHE weirdness to produce efficient arithmetic circuits while letting the programmer concentrate on writing their programs.
+							</p>
+							<p>
+								At the moment, I'm specifically interested in developing vectorization techniques for FHE programs.
+								While normal FHE computation is very slow (like, several orders of magnitude slower than normal), it does provide the ability to <em>vectorize</em>, or pack multiple identical operations into a single step. 
+								We have to be careful when vectorizing FHE programs, though, since at every step, all the data has to line up perfectly, and shuffling data around in FHE vectors is very expensive. 
+								I'm currently working on building a compiler that automatically figures out both data placement and how to group together operations to convert a scalar arithmetic circuit into an efficient vector program. 
+							</p>
+						</article>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							</article>
+					<!-- Work -->
+						<article id="work">
+							<h2 class="major">Work</h2>
+							<!-- <span class="image main"><img src="images/pic02.jpg" alt="" /></span> -->
+							<h3>Publications</h3>
+							<ul>
+								<li>
+									<h4>HACCLE: Metaprogramming for Secure Multi-Party Computation</h4>
+									<h5>(GPCE 2021)</h5>
+									<p>Yuyan Bao, Kirshanthan Sundararajah, Raghav Malik, Qianchuan Ye, Christopher Wagner, Nouraldin Jaber, Fei Wang, Mohammad Hassan Ameri, Donghang Lu, Alexander Seto, Benjamin Delaware, Roopsha Samanta, Aniket Kate, Christina Garman, Jeremiah Blocki, Pierre-David Letourneau, Benoit Meister, Jonathan Springer, Tiark Rompf, Milind Kulkarni</p>
+									<p><a href="https://arxiv.org/abs/2009.01489" class="button">Preprint</a></p>
+								</li>
+								<li>
+									<h4>Vectorized Secure Evaluation of Decision Forests</h4>
+									<h5>(PLDI 2020)</h5>
+									<p>Raghav Malik, Vidush Singhal, Benjamin Gottfried, Milind Kulkarni</p>
+									<a href="https://dl.acm.org/doi/10.1145/3453483.3454094" class="button">ACM DL Page</a>
+									<a href="https://arxiv.org/abs/2104.09583" class="button">PDF on arXiv</a>
+									<a href="https://bitbucket.org/plcl/copse" class="button">Code</a>
+
+
+								</li>
+							</ul>
+						</article>
 
 						<!-- About -->
 							<article id="about">
