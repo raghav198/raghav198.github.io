@@ -617,7 +617,7 @@ input, select, textarea {
 			text-rendering: auto;
 			line-height: 1;
 			text-transform: none !important;
-			font-family: 'Font Awesome 5 Free';
+			/* font-family: 'Font Awesome 5 Free'; */
 			font-weight: 400;
 		}
 
@@ -1652,6 +1652,8 @@ input, select, textarea {
 
 	ul.publications {
 		list-style-type: none;
+		padding: 0;
+		margin: 0;
 	}
 
 	ul.publications li {
@@ -1741,16 +1743,36 @@ input, select, textarea {
 		float: left;
 	}
 
-		/* .paper-info {
-			display: flex;
-		}
-		.metadata {
-			flex:1;
-		}
-		.abstract {
-			flex:0;
-		} */
+		
 
+	ul.experiences {
+		list-style-type: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	li.experience-item {
+		display: block;
+		height: 4rem;
+	}
+
+	li.experience-item .experience-name {
+		font-variant: small-caps;
+		padding-bottom: 0;
+		margin-bottom: 0;
+		padding-left: 0;
+		display: block;
+	}
+
+	li.experience-item .experience-date {
+		float: right;
+		font-style: oblique;
+	}
+
+	li.experience-item .experience-location {
+		float: left;
+		font-style: oblique;
+	}
 
 /* Footer */
 
