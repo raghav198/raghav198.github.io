@@ -6,6 +6,15 @@
 
 (function($) {
 
+	// Add custom trigger when an element is shown
+	$.each(['show', 'hide'], function(i, ev) {
+		var el = $.fn[ev];
+		$.fn[ev] = function() {
+			this.trigger(ev);
+			return el.apply(this, arguments);
+		};
+	});
+
 	var	$window = $(window),
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
@@ -77,6 +86,8 @@
 				// No such article? Bail.
 					if ($article.length == 0)
 						return;
+
+				$article.trigger('activated', []);
 
 				// Handle lock.
 

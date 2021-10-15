@@ -27,7 +27,8 @@ section, summary, time, mark, audio, video {
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;}
+	display: block;
+}
 
 body {
 	line-height: 1;
@@ -59,6 +60,7 @@ mark {
 	background-color: transparent;
 	color: inherit;
 }
+
 
 input::-moz-focus-inner {
 	border: 0;
@@ -1640,6 +1642,115 @@ input, select, textarea {
 			}
 
 		}
+
+
+
+/* My stuff */
+	.authors {
+		font-size: 0.75rem;
+	}
+
+	ul.publications {
+		list-style-type: none;
+	}
+
+	ul.publications li {
+		background-color: transparent;
+		perspective: 1000px;
+	}
+
+	.paper-info {
+		padding: 0.5em;
+		margin-bottom: 0.5em;
+		border-width: 1px;
+		border-style: groove;
+		border-radius: 1em;
+
+		position: relative;
+		transition: transform 0.5s;
+		-webkit-transition: transform 0.5s;
+		-moz-transition: transform 0.5s;
+		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+
+		width: 100%;
+		height: 100%;
+	}
+
+	.progress-bar {
+		/* border-width: 5px;
+		border-color: red;
+		border-style: double; */
+		width: 100%;
+		height: 0.5em;
+		background-color: gray;
+	}
+	.progress {
+		width: 1%;
+		height: 0.5em;
+		background-color: red;
+		float: left;
+	}
+
+	ul.publications li.flipped .paper-info {
+		transform: rotateY(180deg);
+		-webkit-transform: rotateY(180deg);
+		-moz-transform: rotateY(180deg);
+	}
+
+	.metadata, .abstract {
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		
+		transform: rotateX(0deg);
+		-webkit-transform: rotateX(0deg);
+		-moz-transform: rotateX(0deg);
+
+		width: 100%;
+		height: 100%;
+
+		position: relative;
+	}
+
+	.abstract {
+		transform: rotateY(180deg);
+		-webkit-transform: rotateY(180deg);
+		-moz-transform: rotateY(180deg);
+		position: absolute;
+	}
+
+	.paper-actions {
+		margin: 0 0 2rem 0;
+		display: block;
+	}
+
+	.flip-abstract {
+		display: block;
+		float: right;
+	}
+
+	.abstract-header {
+		display: block;
+		height: 2.5rem;
+	}
+
+	.abstract-title {
+		display: block;
+		float: left;
+	}
+
+		/* .paper-info {
+			display: flex;
+		}
+		.metadata {
+			flex:1;
+		}
+		.abstract {
+			flex:0;
+		} */
+
 
 /* Footer */
 

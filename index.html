@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -32,10 +33,10 @@
 						<nav>
 							<ul>
 								<li><a href="#research">Research</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
+								<li><a href="#work">Publications</a></li>
+								<li><a href="#about">Experience</a></li>
 								<li><a href="#contact">Contact</a></li>
-								<li><a href="#elements">Elements</a></li>
+								<!-- <li><a href="#elements">Elements</a></li> -->
 							</ul>
 						</nav>
 					</header>
@@ -63,32 +64,69 @@
 
 					<!-- Work -->
 						<article id="work">
-							<h2 class="major">Work</h2>
+							<!-- <h1 class="major">Work</h1> -->
 							<!-- <span class="image main"><img src="images/pic02.jpg" alt="" /></span> -->
-							<h3>Publications</h3>
-							<ul>
+							<h2 class="major">Publications</h2>
+							<ul class="publications">
 								<li>
-									<h4>HACCLE: Metaprogramming for Secure Multi-Party Computation</h4>
-									<h5>(GPCE 2021)</h5>
-									<p>Yuyan Bao, Kirshanthan Sundararajah, Raghav Malik, Qianchuan Ye, Christopher Wagner, Nouraldin Jaber, Fei Wang, Mohammad Hassan Ameri, Donghang Lu, Alexander Seto, Benjamin Delaware, Roopsha Samanta, Aniket Kate, Christina Garman, Jeremiah Blocki, Pierre-David Letourneau, Benoit Meister, Jonathan Springer, Tiark Rompf, Milind Kulkarni</p>
-									<p><a href="https://arxiv.org/abs/2009.01489" class="button">Preprint</a></p>
+									<div class="paper-info">
+										<div class="metadata">
+											<h3>HACCLE: Metaprogramming for Secure Multi-Party Computation</h3>
+											<h4>(GPCE 2021)</h4>
+											<p class="authors">Yuyan Bao, Kirshanthan Sundararajah, <strong>Raghav Malik</strong>, Qianchuan Ye, Christopher Wagner, Nouraldin Jaber, Fei Wang, Mohammad Hassan Ameri, Donghang Lu, Alexander Seto, Benjamin Delaware, Roopsha Samanta, Aniket Kate, Christina Garman, Jeremiah Blocki, Pierre-David Letourneau, Benoit Meister, Jonathan Springer, Tiark Rompf, Milind Kulkarni</p>
+										</div>
+										<div class="abstract">
+											<div class="abstract-header">
+												<h3 class="abstract-title">Abstract</h3>
+												<a class="flip-abstract">&larr; Back</a>
+											</div>
+											<p>
+												Cryptographic techniques have the potential to enable distrusting parties to collaborate in fundamentally new ways, but their practical implementation poses numerous challenges.
+												An important class of such cryptographic techniques is known as Secure Multi-Party Computation (MPC). 
+												Developing Secure MPC applications in realistic scenarios requires extensive knowledge spanning multiple areas of cryptography and systems. 
+												And while the steps to arrive at a solution for a particular application are often straightforward, it remains difficult to make the implementation efficient, and tedious to apply those same steps to a slightly different application from scratch. 
+												Hence, it is an important problem to design platforms for implementing Secure MPC applications with minimum effort and using techniques accessible to non-experts in cryptography. </p>
+												<p>In this paper, we present the HACCLE (High Assurance Compositional Cryptography: Languages and Environments) toolchain, specifically targeted to MPC applications. 
+												HACCLE contains an embedded domain-specific language Harpoon, for software developers without cryptographic expertise to write MPC-based programs, and uses Lightweight Modular Staging (LMS) for code generation. 
+												Harpoon programs are compiled into acyclic circuits represented in HACCLE's Intermediate Representation (HIR) that serves as an abstraction over different cryptographic protocols such as secret sharing, homomorphic encryption, or garbled circuits. 
+												Implementations of different cryptographic protocols serve as different backends of our toolchain. 
+												The extensible design of HIR allows cryptographic experts to plug in new primitives and protocols to realize computation. 
+												And the use of standard metaprogramming techniques lowers the development effort significantly.</p>
+										</div>
+									</div>
+									<div class="paper-actions">
+										<a href="https://arxiv.org/pdf/2009.01489.pdf" class="button small" target="_blank">PDF on arXiv</a>
+										<a class="flip-abstract">Abstract &rarr;</a>
+									</div>
 								</li>
 								<li>
-									<h4>Vectorized Secure Evaluation of Decision Forests</h4>
-									<h5>(PLDI 2020)</h5>
-									<p>Raghav Malik, Vidush Singhal, Benjamin Gottfried, Milind Kulkarni</p>
-									<a href="https://dl.acm.org/doi/10.1145/3453483.3454094" class="button">ACM DL Page</a>
-									<a href="https://arxiv.org/abs/2104.09583" class="button">PDF on arXiv</a>
-									<a href="https://bitbucket.org/plcl/copse" class="button">Code</a>
-
-
+									<div class="paper-info">
+										<div class="metadata">
+											<h3>Vectorized Secure Evaluation of Decision Forests</h3>
+											<h4>(PLDI 2020)</h4>
+											<p class="authors"><strong>Raghav Malik</strong>, Vidush Singhal, Benjamin Gottfried, Milind Kulkarni</p>
+										</div>
+										<div class="abstract">
+											<div class="abstract-header">
+												<h3 class="abstract-title">Abstract</h3>
+												<a class="flip-abstract">&larr; Back</a>
+											</div>
+											As the demand for machine learning-based inference increases in tandem with concerns about privacy, there is a growing recognition of the need for secure machine learning, in which secret models can be used to classify private data without the model or data being leaked. Fully Homomorphic Encryption (FHE) allows arbitrary computation to be done over encrypted data, providing an attractive approach to providing such secure inference. While such computation is often orders of magnitude slower than its plaintext counterpart, the ability of FHE cryptosystems to do <em>ciphertext packing</em> &mdash; that is, encrypting an entire vector of plaintexts such that operations are evaluated elementwise on the vector &mdash; helps ameliorate this overhead, effectively creating a SIMD architecture where computation can be vectorized for more efficient evaluation. Most recent research in this area has targeted regular, easily vectorizable neural network models. Applying similar techniques to irregular ML models such as decision forests remains unexplored, due to their complex, hard-to-vectorize structures. In this paper we present COPSE, the first system that exploits ciphertext packing to perform decision-forest inference. COPSE consists of a staging compiler that automatically restructures and compiles decision forest models down to a new set of vectorizable primitives for secure inference. We find that COPSE's compiled models outperform the state of the art across a range of decision forest models, often by more than an order of magnitude, while still scaling well.
+										</div>
+									</div>
+									<p class="paper-actions">
+										<a href="https://dl.acm.org/doi/10.1145/3453483.3454094" class="button small" target="_blank">ACM DL Page</a>
+										<a href="https://arxiv.org/pdf/2104.09583.pdf" class="button small" target="_blank">PDF on arXiv</a>
+										<a href="https://bitbucket.org/plcl/copse" class="button small" target="_blank">Code</a>
+										<a class="flip-abstract">Abstract &rarr;</a>
+									</p>
 								</li>
 							</ul>
 						</article>
 
 						<!-- About -->
 							<article id="about">
-								<h2 class="major">About</h2>
+								<h2 class="major">About Me</h2>
 								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
 								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
 							</article>
@@ -384,6 +422,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/abstract-slider.js"></script>
 
 	</body>
 </html>
