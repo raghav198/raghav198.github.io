@@ -1753,15 +1753,18 @@ input, select, textarea {
 
 	li.experience-item {
 		display: block;
-		height: 4rem;
+		/* height: 4rem; */
+		margin-bottom: 1.5rem;
 	}
 
 	li.experience-item .experience-name {
 		font-variant: small-caps;
+		font-size: 1.2rem;
 		padding-bottom: 0;
 		margin-bottom: 0;
 		padding-left: 0;
 		display: block;
+		clear: both;
 	}
 
 	li.experience-item .experience-date {
@@ -1771,6 +1774,10 @@ input, select, textarea {
 
 	li.experience-item .experience-location {
 		float: left;
+	}
+
+	li.experience-item .experience-description {
+		clear: both;
 		font-style: oblique;
 	}
 
