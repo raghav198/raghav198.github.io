@@ -62,7 +62,7 @@
 
         if ($li.hasClass('flipped')) {
             $li.removeClass('flipped');
-            $('.flip-abstract').html('Abstract &rarr;')
+            $li.find('.flip-abstract').html('Abstract &rarr;')
             
             $metadata.show();
             $abstract.hide();
@@ -71,7 +71,7 @@
 
         } else {
             $li.addClass('flipped');
-            $('.flip-abstract').html('&larr; Back');
+            $li.find('.flip-abstract').html('&larr; Back');
 
             $metadata.hide();
             $abstract.show();
