@@ -1757,7 +1757,7 @@ input, select, textarea {
 		margin-bottom: 1.5rem;
 	}
 
-	li.experience-item .experience-name {
+	li.experience-item .experience-name, li.talk .talk-title {
 		font-variant: small-caps;
 		font-size: 1.2rem;
 		padding-bottom: 0;
@@ -1767,12 +1767,12 @@ input, select, textarea {
 		clear: both;
 	}
 
-	li.experience-item .experience-date {
+	li.experience-item .experience-date, li.talk .talk-date {
 		float: right;
 		font-style: oblique;
 	}
 
-	li.experience-item .experience-location {
+	li.experience-item .experience-location, li.talk .talk-place {
 		float: left;
 	}
 
@@ -1780,6 +1780,7 @@ input, select, textarea {
 		clear: both;
 		font-style: oblique;
 	}
+
 
 /* Footer */
 
