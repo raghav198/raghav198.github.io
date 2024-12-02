@@ -79,7 +79,7 @@
 			locked = false;
 
 		// Methods.
-			$main._show = function(id, initial) {
+			$main._show = function(id, initial, andThen) {
 
 				var $article = $main_articles.filter('#' + id);
 
@@ -120,6 +120,7 @@
 							// Unmark as switching.
 								setTimeout(function() {
 									$body.removeClass('is-switching');
+									andThen();
 								}, (initial ? 1000 : 0));
 
 							return;
@@ -161,6 +162,8 @@
 												locked = false;
 											}, delay);
 
+											andThen();
+
 									}, 25);
 
 							}, delay);
@@ -199,6 +202,8 @@
 											setTimeout(function() {
 												locked = false;
 											}, delay);
+
+											andThen();
 
 									}, 25);
 
@@ -345,7 +350,11 @@
 			});
 
 			$window.on('hashchange', function(event) {
-
+					let target = location.hash;
+					let subtarget = "";
+					if (location.hash.includes("_")) {
+						[target, subtarget] = location.hash.split("_");
+					}
 				// Empty hash?
 					if (location.hash == ''
 					||	location.hash == '#') {
@@ -360,14 +369,20 @@
 					}
 
 				// Otherwise, check for a matching article.
-					else if ($main_articles.filter(location.hash).length > 0) {
+					else if ($main_articles.filter(target).length > 0) {
 
 						// Prevent default.
 							event.preventDefault();
 							event.stopPropagation();
 
 						// Show article.
-							$main._show(location.hash.substr(1));
+							$main._show(target.substr(1), undefined, function () {
+								if (subtarget != "") {
+									location.hash = "#" + subtarget;
+	
+									$("#" + subtarget).get(0).scrollIntoView();
+								}
+							});
 
 					}
 
@@ -406,7 +421,7 @@
 				if (location.hash != ''
 				&&	location.hash != '#')
 					$window.on('load', function() {
-						$main._show(location.hash.substr(1), true);
+						$main._show(location.hash.substr(1), true, function() {});
 					});
 
 })(jQuery);

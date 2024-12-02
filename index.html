@@ -28,11 +28,11 @@
 						<div class="content">
 							<div class="inner">
 								<h1>Raghav Malik</h1>
-								<p>I'm currently a PhD student working with Prof. <a href="https://engineering.purdue.edu/~milind/" target="_blank">Milind Kulkarni</a> as part of the <a href="https://purpl.cs.purdue.edu/" target="_blank">Purdue Programming Languages Group</a> (PurPL). I work on developing optimizing compilers for Fully Homomorphic Encryption.
+								<p>I'm currently a PhD candidate working with Prof. <a href="https://engineering.purdue.edu/~milind/" target="_blank">Milind Kulkarni</a> as part of the <a href="https://purpl.cs.purdue.edu/" target="_blank">Purdue Programming Languages Group</a> (PurPL). I work on building compilers for privacy-preserving computation. I'm on the job market right now!
 								</p>
 									<ul class="icons">
 										<li><a href="mailto:malik22@purdue.edu" target="_blank" class="icon fa fa-envelope"><span class="label">Email</span></a></li>
-										<li><a href="https://twitter.com/RaghavMalik15" target="_blank" class="icon fab fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="https://bsky.app/profile/r4ghav.bsky.social" target="_blank" class="icon fab fa-brands fa-twitter"><span class="label">Bluesky</span></a></li>
 										<li><a href="https://github.com/raghav198" target="_blank" class="icon fab fa-github"><span class="label">GitHub</span></a></li>
 										<li><a href="https://scholar.google.com/citations?hl=en&user=YF_h3zEAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" class="icon ai ai-google-scholar"><span class="label">Google Scholar</span></a></li>
 									</ul>
@@ -44,6 +44,7 @@
 								<li><a href="#publications">Publications</a></li>
 								<li><a href="#experience">Experience</a></li>
 								<li><a href="#talks">Talks</a></li>
+								<li><a href="assets/cv.pdf" target="_blank">CV</a></li>
 								<!-- <li><a href="#contact">Contact</a></li> -->
 								<!-- <li><a href="#elements">Elements</a></li> -->
 							</ul>
@@ -57,18 +58,47 @@
 						<article id="research">
 							<h2 class="major">My Research</h2>
 							<span class="image main"><img src="images/homomorphic-encryption-diagram.png" alt="" /></span>
-							<p>TL;DR: I'm interested in building compilers specifically to optimize Fully Homomorphic Encryption programs. </p>
+							<p>TL;DR: I'm interested in building compilers and PLs for privacy-preserving computation.</p>
+							<!-- <p>TL;DR: I'm interested in building compilers specifically to optimize Fully Homomorphic Encryption programs. </p> -->
 							<p>
+								The style of privacy-preserving computation I'm interested in is Multiparty Computation (MPC): a class of cryptographic techniques in which mutually distrustful parties collaborate to compute a function without revealing their private inputs to the function.
+								More specifically, a lot of my work deals with Fully Homomorphic Encryption (FHE), a particular MPC protocol that works by encrypting inputs and then performing computations on the ciphertexts.
+								People care a lot about MPC&mdash;at least, I do&mdash;because it enables <em>privacy-preserving computation</em>, and has some really cool applications like secure machine learning or offloading analyses over sensitive data.
+								Unfortunately, actually writing programs that use MPC in practice is really hard: even in the current state of the art, the cryptographic overhead is <em>insane</em> (like, several orders of magnitude slower than normal), and the programming model can be highly counterintuitive for non-cryptographers.
+							</p>
+							<p>
+								I'm a compiler person, and with compilers as my hammer, the world of MPC looks a lot like a nail: a compiler can abstract away all the messy details about the MPC programming model, and allow you to write programs in a comfortable, familiar language.
+								A lot of classic MPC compilers take a very&hellip;80's-esque&hellip;approach to compilation (mechanically translating operations into their secure equivalents and doing very little optimization on top of this).
+								My research focuses on building compilers that are <em>MPC-aware</em>:
+								By knowing something about the MPC scheme we're targeting, we're able to automatically apply some really cool tricks from the depths of crypto literature!
+								For example, in <a href="#publications_paper-coyote">Coyote</a>, I showed how, by considering the subtleties of the cost model for vectorization in some FHE schemes we can avoid a lot of the pitfalls that classic, SLP-style vectorizers run into (and, as an added benefit, automatically find really good data layouts!)
+								In <a href="#publications_paper-coil">COIL</a>, I demonstrated that because of the way branches work in MPC (they don't), we have to be really careful when translating programs with control flow. By playing some clever tricks involving remembering branching conditions, we can sometimes avoid doing unnecessary computation altogether!
+							</p>
+							<p>
+								Of course, we can take all this a step further. Instead of just designing <em>compilers that target particular cryptosystems</em>, we can <em>make cryptosystems that are better compilation targets</em> and <em>then</em> build the compilers (I'm calling this "compiler-cryptosystem codesign" because it sounds like "hardware-software codesign").
+								I started working towards this goal with <a href="#publications_paper-coatl">COATL</a>, where I showed that by replacing the fundamental unit of computation in CGGI (a particular style of FHE scheme) with a thing I called <em>arithmetic lookup tables</em> instead of the usual <em>Boolean gates</em>, we can build compilers that manage to express the same programs using <em>fewer CGGI operations overall!</em>
+							</p>
+							<p>
+								My research barely scratches the surface of what I think is possible in this space!
+								A question I've been thinking about recently is, what features should a cryptosystem support to make compiler writers' jobs easier? What are the right abstractions to use here at the protocol level? What about at the "language" level? Some really cool people have done some really cool work (like <a href="https://dl.acm.org/doi/10.1145/3453483.3454074">Viaduct</a>, <a href="https://dl.acm.org/doi/10.1145/3591261">Taype</a>) about designing better languages for MPC, but a lot of this is still pretty theoretical; how do we build actual, usable compilers for these languages?
+								<br>
+								People have recently been looking at running FHE on things like <a href="https://dl.acm.org/doi/10.1145/3466752.3480070">dedicated hardware accelerators</a>; what would it take to write compilers that target these, instead of the usual FHE libraries?
+								<br>
+								Finally, cryptographers keep adding features to their FHE schemes that compilers don't really know how to use (my favorite examples of this are <a href="https://eprint.iacr.org/2018/758">scheme switching</a> and <a href="https://eprint.iacr.org/2024/109">faster BFV bootstrapping</a>). Someone should do something about that!!
+								<br>
+								If any of these questions sound interesting to you, or you have ideas or answers, please feel free to <a href="mailto:malik22@purdue.edu">contact me!</a>
+							</p>
+							<!-- <p>
 								Fully Homomorphic Encryption refers to any number of encryption schemes that preserve the ring structure of their plaintext (i.e. if you encrypt two numbers and add or multiply the ciphertexts, you get back an encryption of the sum or product of the original numbers).
 								FHE is a powerful tool for for implementing arbitrary fixed-size arithmetic circuits over encrypted data, but the underlying computational model is very different from the one you're used to. 
 								Taking these pecularities into account when compiling arithmetic FHE circuits is often challenging, and my research is interested in building compilers that automatically factor in all the FHE weirdness to produce efficient arithmetic circuits while letting the programmer concentrate on writing their programs.
-							</p>
-							<p>
+							</p> -->
+							<!-- <p>
 								At the moment, I'm specifically interested in developing vectorization techniques for FHE programs.
 								While normal FHE computation is very slow (like, several orders of magnitude slower than normal), it does provide the ability to <em>vectorize</em>, or pack multiple identical operations into a single step. 
 								We have to be careful when vectorizing FHE programs, though, since at every step, all the data has to line up perfectly, and shuffling data around in FHE vectors is very expensive. 
 								I'm currently working on building a compiler that automatically figures out both data placement and how to group together operations to convert a scalar arithmetic circuit into an efficient vector program. 
-							</p>
+							</p> -->
 						</article>
 
 					<!-- Work -->
@@ -78,7 +108,7 @@
 							<h2 class="major">Publications</h2>
 							<ul class="publications">
 								<li>
-									<div class="paper-info">
+									<div class="paper-info" id="paper-haccle">
 										<div class="metadata">
 											<h3>HACCLE: Metaprogramming for Secure Multi-Party Computation</h3>
 											<h4>(GPCE 2021)</h4>
@@ -109,7 +139,7 @@
 									</div>
 								</li>
 								<li>
-									<div class="paper-info">
+									<div class="paper-info" id="paper-copse">
 										<div class="metadata">
 											<h3>Vectorized Secure Evaluation of Decision Forests</h3>
 											<h4>(PLDI 2020)</h4>
@@ -131,7 +161,7 @@
 									</p>
 								</li>
 								<li>
-									<div class="paper-info">
+									<div class="paper-info" id="paper-coyote">
 										<div class="metadata">
 											<h3>Coyote: A Compiler for Vectorizing Encrypted Arithmetic Circuits</h3>
 											<h4>(ASPLOS 2023)</h4>
@@ -151,6 +181,58 @@
 										<a class="flip-abstract">Abstract &rarr;</a>
 									</p>
 								</li>
+								<li>
+									<div class="paper-info" id="paper-coil">
+										<div class="metadata">
+											<h3>COIL: Compiling Homomorphic Circuits With Control Flow</h3>
+											<h4>(Preprint)</h4>
+											<p class="authors"><strong>Raghav Malik</strong>, Milind Kulkarni</p>
+										</div>
+										<div class="abstract">
+											<div class="abstract-header">
+												<h3 class="abstract-title">Abstract</h3>
+												<a class="flip-abstract">&larr; Back</a>
+											</div>
+											<p>
+												Fully Homomorphic Encryption (FHE) enables evaluating computations over ciphertexts without revealing the encrypted data. A key challenge when compiling for FHE is dealing with control flow: the usual semantics require the party evaluating the program to learn something about each branch, which violates the basic premise of secure computations. Standard "multiplexer"-based compilers solve this problem by generating programs that require the evaluator to execute every possible path, obviating the need to know which path is correct. Thus, they provide oblivious semantics at the cost of producing unwieldy circuits that are difficult to effectively optimize.
+											</p>
+											<p>
+												We present COIL, an FHE compiler that addresses the control flow challenge by restructuring how control flow in circuits is interpreted, replacing the use of multiplexers with path forests, and enabling a series of path-dependent optimizations that result in more efficient realizations of complex branching kernels. We demonstrate on a variety of benchmarks that COIL outperforms other state-of-the-art FHE compilation techniques, often by more than an order of magnitude.
+											</p>
+										</div>
+									</div>
+									<p class="paper-actions">
+										<a href="assets/papers/coil.pdf" class="button small" target="_blank">Download PDF</a>
+										<!-- <a href="https://github.com/raghav198/coyote" class="button small" target="_blank">Code</a> -->
+										<a class="flip-abstract">Abstract &rarr;</a>
+									</p>
+								</li>
+								<li>
+									<div class="paper-info" id="paper-coatl">
+										<div class="metadata">
+											<h3>Circuit Optimization Using Arithmetic Table Lookups</h3>
+											<h4>(Preprint)</h4>
+											<p class="authors"><strong>Raghav Malik</strong>, Vedant Paranjape, Milind Kulkarni</p>
+										</div>
+										<div class="abstract">
+											<div class="abstract-header">
+												<h3 class="abstract-title">Abstract</h3>
+												<a class="flip-abstract">&larr; Back</a>
+											</div>
+											<p>
+												Fully Homomorphic Encryption (FHE) is a cryptographic technique that enables privacy-preserving computation. State-of-the-art Boolean FHE implementations provide a very low-level interface, usually exposing a limited set of Boolean gates that programmers must use to write their FHE applications. This programming model is unnecessarily restrictive: many Boolean FHE schemes support <em>programable bootstrapping</em>, an operation that allows evaluation of an arbitrary fixed-size lookup table. However, most modern FHE compilers are only capable of reasoning about traditional Boolean circuits, and therefore struggle to take full advantage of programmable bootstrapping.
+											</p>
+											<p>
+    											We present COATL, an FHE compiler that makes use of programmable bootstrapping to produce circuits that are smaller and more efficient than their traditional Boolean counterparts. COATL generates circuits using <em>arithmetic lookup tables</em>, a novel abstraction we introduce for reasoning about computations in Boolean FHE programs. We demonstrate on a variety of benchmarks that COATL can generate circuits that run up to 1.5x faster than those generated by other state-of-the-art compilation strategies.
+											</p>
+										</div>
+									</div>
+									<p class="paper-actions">
+										<a href="assets/papers/coatl.pdf" class="button small" target="_blank">Download PDF</a>
+										<!-- <a href="https://github.com/raghav198/coyote" class="button small" target="_blank">Code</a> -->
+										<a class="flip-abstract">Abstract &rarr;</a>
+									</p>
+								</li>
 							</ul>
 						</article>
 
@@ -161,7 +243,7 @@
 							<ul class="experiences">
 								<li class="experience-item">
 									<div class="experience-name">PhD, Computer Engineering</div>
-									<div class="experience-date">2019-2024 (expected)</div>
+									<div class="experience-date">2019-2025 (expected)</div>
 									<div class="experience-location">Purdue University</div>
 									<div class="experience-description"></div>
 								</li>
