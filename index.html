@@ -107,7 +107,7 @@
 				<li><a href="assets/diversity.pdf" target="_blank">DEI Statement</a></li>
 			  </ul>
 		  </p>
-          
+
         </article>
 
         <!-- Intro -->
@@ -209,14 +209,14 @@
           </p>
           <!-- <p>
 								Fully Homomorphic Encryption refers to any number of encryption schemes that preserve the ring structure of their plaintext (i.e. if you encrypt two numbers and add or multiply the ciphertexts, you get back an encryption of the sum or product of the original numbers).
-								FHE is a powerful tool for for implementing arbitrary fixed-size arithmetic circuits over encrypted data, but the underlying computational model is very different from the one you're used to. 
+								FHE is a powerful tool for for implementing arbitrary fixed-size arithmetic circuits over encrypted data, but the underlying computational model is very different from the one you're used to.
 								Taking these pecularities into account when compiling arithmetic FHE circuits is often challenging, and my research is interested in building compilers that automatically factor in all the FHE weirdness to produce efficient arithmetic circuits while letting the programmer concentrate on writing their programs.
 							</p> -->
           <!-- <p>
 								At the moment, I'm specifically interested in developing vectorization techniques for FHE programs.
-								While normal FHE computation is very slow (like, several orders of magnitude slower than normal), it does provide the ability to <em>vectorize</em>, or pack multiple identical operations into a single step. 
-								We have to be careful when vectorizing FHE programs, though, since at every step, all the data has to line up perfectly, and shuffling data around in FHE vectors is very expensive. 
-								I'm currently working on building a compiler that automatically figures out both data placement and how to group together operations to convert a scalar arithmetic circuit into an efficient vector program. 
+								While normal FHE computation is very slow (like, several orders of magnitude slower than normal), it does provide the ability to <em>vectorize</em>, or pack multiple identical operations into a single step.
+								We have to be careful when vectorizing FHE programs, though, since at every step, all the data has to line up perfectly, and shuffling data around in FHE vectors is very expensive.
+								I'm currently working on building a compiler that automatically figures out both data placement and how to group together operations to convert a scalar arithmetic circuit into an efficient vector program.
 							</p> -->
         </article>
 
@@ -478,7 +478,7 @@
               <div class="paper-info" id="paper-coatl">
                 <div class="metadata">
                   <h3>Circuit Optimization Using Arithmetic Table Lookups</h3>
-                  <h4>(Conditionally Accepted to PLDI 2025)</h4>
+                  <h4>(PLDI 2025)</h4>
                   <p class="authors">
                     <strong>Raghav Malik</strong>, Vedant Paranjape, Milind
                     Kulkarni
@@ -519,6 +519,11 @@
               </div>
               <p class="paper-actions">
                 <a
+                  href="https://dl.acm.org/doi/10.1145/3729258"/
+                  class="button small"
+                  target="_blank"
+                >ACM DL Page</a>
+                <a
                   href="assets/papers/coatl.pdf"
                   class="button small"
                   target="_blank"
@@ -548,7 +553,7 @@
                     Fully Homomorphic Encryption (FHE) enables secure computation on encrypted data, ensuring privacy in various applications. However, FHE's practicality is constrained by the substantial overhead of encrypted computation. This overhead can be partially mitigated by using vectorization strategies to optimize FHE computations. The unique semantics of FHE computations make vectorizing arbitrary applications challenging, so recent research focuses on applying synthesis-based techniques, which have the drawback of failing to scale well to vectorizing large programs.
                   </p>
                   <p>
-                    This paper proposes Biscotti, a compiler pass that integrates with existing synthesis-based vectorization approaches by breaking programs down into more manageable pieces, synthesizing vector schedules for each piece, and then composing these into a schedule for the entire program. We demonstrate on a variety of common benchmarks that Biscotti's appraoch not only improves compilation time, but also results in more efficient schedules overall. 
+                    This paper proposes Biscotti, a compiler pass that integrates with existing synthesis-based vectorization approaches by breaking programs down into more manageable pieces, synthesizing vector schedules for each piece, and then composing these into a schedule for the entire program. We demonstrate on a variety of common benchmarks that Biscotti's appraoch not only improves compilation time, but also results in more efficient schedules overall.
                   </p>
                 </div>
               </div>
@@ -650,6 +655,13 @@
           <ul class="talk-list">
             <li class="talk">
               <div class="talk-title">
+                Compiling Control Flow in Homomorphic Circuits
+              </div>
+              <div class="talk-date">7 October 2026</div>
+              <div class="talk-place">Microsoft Azure</div>
+            </li>
+            <li class="talk">
+              <div class="talk-title">
                 Compiler Cryptosystem Co-Design
               </div>
               <div class="talk-date">8 October 2025</div>
@@ -663,7 +675,7 @@
                 COATL: Circuit Optimization Using Arithmetic Table Lookups
               </div>
               <div class="talk-date">18 June 2025</div>
-              <div class="tall-place">PLDI 2025</div>
+              <div class="talk-place">PLDI 2025</div>
             </li>
             <li class="talk">
               <div class="talk-title">
